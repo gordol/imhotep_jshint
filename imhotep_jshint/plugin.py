@@ -26,6 +26,6 @@ class JSHint(Tool):
 
         ignore_path = os.path.join(dirname, self.jshintignore_filename)
         if os.path.exists(ignore_path):
-            cmd += "--config=%s " % ignore_path
+            cmd += "--exclude-path=%s " % ignore_path
 
         return cmd
