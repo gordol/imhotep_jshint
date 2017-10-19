@@ -6,6 +6,7 @@ class JSHint(Tool):
     response_format = re.compile(r'^(?P<filename>.*): ' \
         r'line (?P<line_number>\d+), col \d+, (?P<message>.*)$')
     jshintrc_filename = '.jshintrc'
+    jshintignore_filename = '.jshintignore'
 
     def process_line(self, dirname, line):
         "myapp.js: line 27, col 14, you messed up"
@@ -21,5 +22,10 @@ class JSHint(Tool):
         cmd = "jshint "
         config_path = os.path.join(dirname, self.jshintrc_filename)
         if os.path.exists(config_path):
-            cmd += "--config=%s" % config_path
+            cmd += "--config=%s " % config_path
+
+        ignore_path = os.path.join(dirname, self.jshintignore_filename)
+        if os.path.exists(ignore_path):
+            cmd += "--config=%s " % ignore_path
+
         return cmd
